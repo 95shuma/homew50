@@ -1,4 +1,7 @@
 package homew50.homew50.model;
 
-public interface EventRepository {
+import org.springframework.data.repository.CrudRepository;
+
+public interface EventRepository extends CrudRepository <Event, String> {
+    //
 }
