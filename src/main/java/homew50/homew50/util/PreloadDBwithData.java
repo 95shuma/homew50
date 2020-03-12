@@ -42,8 +42,20 @@ public class PreloadDBwithData {
         pr.deleteAll();
 
         ur.saveAll(createUsers());
+        Publication pc = new Publication("some description 1","1.jpg",LocalDateTime.now());
+        pr.save(pc);
+        pr.save(new Publication("some description 2","2.jpg",LocalDateTime.now()));
 
-        cr.save(new Comment("some text", LocalDateTime.now(),ur.findUsersByName("Aibek").getId()));
+        var user = ur.findUsersByName("Aibek");
+        System.out.println(user.toString());
+
+        user.getPublicationList().add(pc);
+        user.getPublicationList().add(pr.findPublicationByDescription("some description 2"));
+        ur.save(user);
+
+        System.out.println(ur.findUsersByName("Aibek").getPublicationList().toString());
+        //new Publication("some description 1","1.jpg",LocalDateTime.now()));
+        /*cr.save(new Comment("some text", LocalDateTime.now(),ur.findUsersByName("Aibek").getId()));
         cr.save(new Comment("some text", LocalDateTime.now(),ur.findUsersByName("Arstan").getId()));
         cr.save(new Comment("some text", LocalDateTime.now(),ur.findUsersByName("Ali").getId()));
 
@@ -58,7 +70,7 @@ public class PreloadDBwithData {
         lr.save(new Like(ur.findUsersByName("Aibek").getId(),pr.findPublicationByDescription("some description 1").getId(),LocalDateTime.now()));
         lr.save(new Like(ur.findUsersByName("Arstan").getId(),pr.findPublicationByDescription("some description 2").getId(),LocalDateTime.now()));
         lr.save(new Like(ur.findUsersByName("Ali").getId(),pr.findPublicationByDescription("some description 3").getId(),LocalDateTime.now()));
-
+*/
         return null;
     }
 
