@@ -2,6 +2,7 @@ package homew50.homew50.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Document(collection = "albumList")
 @Data
+@CompoundIndex(def = "{'name':1, 'releaseYear':1}")
 public class Album {
 
     @Id
