@@ -1,6 +1,7 @@
 package homew50.homew50.util;
 
 import homew50.homew50.model.*;
+import homew50.homew50.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
