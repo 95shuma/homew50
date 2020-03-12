@@ -17,7 +17,6 @@ public class Publication {
     private String description;
     private String image;
     private LocalDateTime date;
-    private String usersId;
     @DBRef
     private List<Comment> commentList = new ArrayList<>();
 

@@ -16,13 +16,20 @@ public class PreloadDBwithData {
     private final EventRepository er;
     private final LikeRepository lr;
     private final PublicationRepository pr;
+    private final SingerRepository singerRepository;
+    private final SongRepository songRepository;
+    private final AlbumRepository albumRepository;
 
-    public PreloadDBwithData(UsersRepository ur, CommentRepository cr, EventRepository er, LikeRepository lr, PublicationRepository pr) {
+    public PreloadDBwithData(UsersRepository ur, CommentRepository cr, EventRepository er, LikeRepository lr, PublicationRepository pr,
+                             SingerRepository singerRepository,SongRepository songRepository,AlbumRepository albumRepository) {
         this.ur = ur;
         this.cr = cr;
         this.er = er;
         this.lr = lr;
         this.pr = pr;
+        this.singerRepository = singerRepository;
+        this.songRepository = songRepository;
+        this.albumRepository = albumRepository;
     }
 
     private List <Users> createUsers(){
@@ -33,6 +40,14 @@ public class PreloadDBwithData {
         return users;
     }
 
+    private List <Singer> createSinger(){
+        List<Singer> singers = new ArrayList<>();
+        singers.add(new Singer("Bilan"));
+        singers.add(new Singer("Lazarev"));
+        singers.add(new Singer("Omar"));
+        return singers;
+    }
+
     @Bean
     CommandLineRunner initDB(){
         ur.deleteAll();
@@ -40,20 +55,51 @@ public class PreloadDBwithData {
         er.deleteAll();
         lr.deleteAll();
         pr.deleteAll();
+        singerRepository.deleteAll();
+        albumRepository.deleteAll();
+        songRepository.deleteAll();
+
+
 
         ur.saveAll(createUsers());
-        Publication pc = new Publication("some description 1","1.jpg",LocalDateTime.now());
-        pr.save(pc);
+        pr.save(new Publication("some description 1","1.jpg",LocalDateTime.now()));
         pr.save(new Publication("some description 2","2.jpg",LocalDateTime.now()));
 
-        var user = ur.findUsersByName("Aibek");
-        System.out.println(user.toString());
+        cr.save(new Comment("some text 1", LocalDateTime.now(),ur.findUsersByName("Arstan").getId()));
+        cr.save(new Comment("some text 2", LocalDateTime.now(),ur.findUsersByName("Arstan").getId()));
 
-        user.getPublicationList().add(pc);
+        var user = ur.findUsersByName("Aibek");
+        user.getPublicationList().add(pr.findPublicationByDescription("some description 1"));
         user.getPublicationList().add(pr.findPublicationByDescription("some description 2"));
+        var publ = pr.findPublicationByDescription("some description 1");
+        publ.getCommentList().add(cr.findCommentByText("some text 1"));
+        publ.getCommentList().add(cr.findCommentByText("some text 2"));
+        pr.save(publ);
         ur.save(user);
 
         System.out.println(ur.findUsersByName("Aibek").getPublicationList().toString());
+        System.out.println(pr.findPublicationByDescription("some description 1").getCommentList().toString());
+
+        singerRepository.saveAll(createSinger());
+
+        albumRepository.save(new Album("Rain",1999));
+        albumRepository.save(new Album("Sky",2000));
+
+        songRepository.save(new Song("Hello"));
+        songRepository.save(new Song("Bye"));
+
+        var singer = singerRepository.findSingerByName("Bilan");
+        singer.getAlbumList().add(albumRepository.findAlbumByName("Rain"));
+        singer.getAlbumList().add(albumRepository.findAlbumByReleaseYear(2000));
+        singerRepository.save(singer);
+
+        var alb = albumRepository.findAlbumByReleaseYear(1999);
+        alb.getSongList().add(songRepository.findSongByName("Hello"));
+        alb.getSongList().add(songRepository.findSongByName("Bye"));
+        albumRepository.save(alb);
+
+        System.out.println(singerRepository.findAll());
+
         //new Publication("some description 1","1.jpg",LocalDateTime.now()));
         /*cr.save(new Comment("some text", LocalDateTime.now(),ur.findUsersByName("Aibek").getId()));
         cr.save(new Comment("some text", LocalDateTime.now(),ur.findUsersByName("Arstan").getId()));
