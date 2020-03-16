@@ -75,11 +75,12 @@ public class PreloadDBwithData {
         var publ = pr.findPublicationByDescription("some description 1");
         publ.getCommentList().add(cr.findCommentByText("some text 1"));
         publ.getCommentList().add(cr.findCommentByText("some text 2"));
+
         pr.save(publ);
         ur.save(user);
 
-        System.out.println(ur.findUsersByName("Aibek").getPublicationList().toString());
-        System.out.println(pr.findPublicationByDescription("some description 1").getCommentList().toString());
+        //System.out.println(ur.findUsersByName("Aibek").getPublicationList().toString());
+        //System.out.println(pr.findPublicationByDescription("some description 1").getCommentList().toString());
 
         singerRepository.saveAll(createSinger());
 
@@ -99,7 +100,7 @@ public class PreloadDBwithData {
         alb.getSongList().add(songRepository.findSongByName("Bye"));
         albumRepository.save(alb);
 
-        System.out.println(singerRepository.findAll());
+        //System.out.println(singerRepository.findAll());
 
         //new Publication("some description 1","1.jpg",LocalDateTime.now()));
         /*cr.save(new Comment("some text", LocalDateTime.now(),ur.findUsersByName("Aibek").getId()));

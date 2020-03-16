@@ -22,6 +22,12 @@ public class Users {
     @DBRef
     private List<Publication> publicationList = new ArrayList<>();
 
+    @DBRef
+    private List<Users> subsciptions;
+
+    @DBRef
+    private List<Users> subscibers;
+
     public Users(String name, String mail, String pass) {
         this.name = name;
         this.mail = mail;
