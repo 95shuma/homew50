@@ -64,15 +64,4 @@ public class Controller {
 
     }
 
-    @PostMapping("/user")
-    public Users createUser(@RequestBody Users user) {
-        ur.save(user);
-        return user;
-    }
-
-    @DeleteMapping("/delete/{name}")
-    public Users deleteUser(@PathVariable("name") String name){
-        ur.deleteUsersByName(name);
-        return null;
-    }
 }

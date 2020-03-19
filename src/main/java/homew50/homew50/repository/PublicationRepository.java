@@ -10,5 +10,5 @@ public interface PublicationRepository extends CrudRepository <Publication, Stri
     @Query("{'id' : {'$ne' : '?0'}}")
     Iterable<Publication> findAllBy(String id);
 
-
+    void deletePublicationById(String id);
 }
