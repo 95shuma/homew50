@@ -4,9 +4,7 @@ import homew50.homew50.model.Publication;
 import homew50.homew50.model.Users;
 import homew50.homew50.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,4 +64,15 @@ public class Controller {
 
     }
 
+    @PostMapping("/user")
+    public Users createUser(@RequestBody Users user) {
+        ur.save(user);
+        return user;
+    }
+
+    @DeleteMapping("/delete/{name}")
+    public Users deleteUser(@PathVariable("name") String name){
+        ur.deleteUsersByName(name);
+        return null;
+    }
 }

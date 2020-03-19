@@ -10,5 +10,7 @@ public interface UsersRepository extends CrudRepository <Users, String> {
 
     boolean existsUsersByMail(String mail);
 
+    void deleteUsersByName(String name);
+
 
 }
