@@ -4,4 +4,5 @@ import homew50.homew50.model.PublicationImage;
 import org.springframework.data.repository.CrudRepository;
 
 public interface PublicationImageRepository extends CrudRepository<PublicationImage,String> {
+    PublicationImage findPublicationImageById(String id);
 }

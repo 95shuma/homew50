@@ -10,7 +10,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
-@Document(collection="movie_images")
+@Document(collection="pub_images")
 public class PublicationImage {
     public static final PublicationImage NO_IMAGE = PublicationImage.builder().id("-NO-IMAGE-").build();
     @Id

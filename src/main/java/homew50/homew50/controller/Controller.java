@@ -11,29 +11,29 @@ import java.util.List;
 
 @RestController
 public class Controller {
-    @Autowired
+    /*@Autowired
     CommentRepository cr;
 
     @Autowired
-    EventRepository er;
+    EventRepository er;*/
 
     @Autowired
     LikeRepository lr;
 
-    @Autowired
-    PublicationRepository pr;
+    /*@Autowired
+    PublicationRepository pr;*/
 
     @Autowired
     UsersRepository ur;
 
-    @GetMapping("/2/1/1/{name}")
+    /*@GetMapping("/2/1/1/{name}")
     public Users getUserByName(@PathVariable("name") String name){
         return ur.findUsersByName(name);
     }
 
     @GetMapping("/2/1/2/{mail}")
     public Users getUserByMail(@PathVariable("mail") String mail){
-        return ur.findUsersByName(mail);
+        return ur.findUsersByMail(mail);
     }
 
     @GetMapping("/2/2/{mail}")
@@ -55,13 +55,11 @@ public class Controller {
             res.addAll(s.getPublicationList());
         }
         return res;
-    }
+    }*/
 
     @GetMapping("/2/5/{mail}")
     public boolean checkLikePub(@PathVariable("mail") String mail){
-
         return lr.existsLikeByUserId(ur.findUsersByMail("mail").getId());
-
     }
 
 }

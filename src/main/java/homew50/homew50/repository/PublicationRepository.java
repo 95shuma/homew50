@@ -2,13 +2,15 @@ package homew50.homew50.repository;
 
 import homew50.homew50.model.Publication;
 import org.springframework.data.mongodb.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface PublicationRepository extends CrudRepository <Publication, String> {
+public interface PublicationRepository extends PagingAndSortingRepository<Publication, String> {
     Publication findPublicationByDescription(String des);
 
     @Query("{'id' : {'$ne' : '?0'}}")
     Iterable<Publication> findAllBy(String id);
 
     void deletePublicationById(String id);
+
+    Publication findPublicationById(String id);
 }

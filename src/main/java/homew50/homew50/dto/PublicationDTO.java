@@ -18,6 +18,7 @@ public class PublicationDTO {
     private String id;
     private String description;
     private String imageId;
+    private String userId;
     private LocalDateTime date;
     private List<Comment> commentList = new ArrayList<>();
 
@@ -30,6 +31,7 @@ public class PublicationDTO {
                 .id(pub.getId())
                 .description(pub.getDescription())
                 .imageId(pubImageId)
+                .userId(pub.getUser().getId())
                 .date(pub.getDate())
                 .commentList(pub.getCommentList())
                 .build();

@@ -12,5 +12,6 @@ public interface UsersRepository extends CrudRepository <Users, String> {
 
     void deleteUsersByName(String name);
 
+    Users findUsersById(String id);
 
 }

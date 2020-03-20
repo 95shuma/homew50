@@ -1,25 +1,36 @@
 package homew50.homew50.controller;
 
-import homew50.homew50.model.Users;
-import homew50.homew50.repository.UsersRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import homew50.homew50.dto.UserDTO;
+import homew50.homew50.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
-
-    @Autowired
-    UsersRepository ur;
+    UserService us;
 
     @PostMapping()
-    public Users createUser(@RequestBody Users user) {
-        ur.save(user);
-        return user;
+    public UserDTO createUser(@RequestBody UserDTO userDTO) {
+        return us.createUser(userDTO);
     }
 
     @DeleteMapping("/delete/{name}")
     public void deleteUser(@PathVariable("name") String name){
-        ur.deleteUsersByName(name);
+        us.deleteUsersByName(name);
+    }
+
+    @GetMapping("/name/{name}")
+    public UserDTO getUserByName (@PathVariable("name") String name){
+        return us.getUserByName(name);
+    }
+
+    @GetMapping("/mail/{mail}")
+    public UserDTO getUserByMail (@PathVariable("mail") String mail){
+        return us.getUserByMail(mail);
+    }
+
+    @GetMapping("/exist/{mail}")
+    public boolean existUserByMail (@PathVariable("mail") String mail) {
+        return us.existUserByMail(mail);
     }
 }

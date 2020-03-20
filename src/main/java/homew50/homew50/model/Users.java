@@ -1,5 +1,6 @@
 package homew50.homew50.model;
 
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Document(collection = "userList")
 @Data
+@Builder
 public class Users {
     @Id
     private String id;
