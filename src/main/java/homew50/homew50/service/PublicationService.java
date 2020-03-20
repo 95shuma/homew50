@@ -47,7 +47,7 @@ public class PublicationService {
         pr.deletePublicationById(id);
     }
 
-    public Slice<PublicationDTO> findAllPub(@ApiIgnore Pageable pageable){
+    public Iterable<PublicationDTO> findAllPub(@ApiIgnore Pageable pageable){
         return pr.findAll(pageable).map(PublicationDTO::from);
     }
 

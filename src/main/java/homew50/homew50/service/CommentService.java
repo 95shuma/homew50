@@ -1,10 +1,7 @@
 package homew50.homew50.service;
 
 import homew50.homew50.dto.CommentDTO;
-import homew50.homew50.dto.PublicationDTO;
-import homew50.homew50.dto.UserDTO;
 import homew50.homew50.model.Comment;
-import homew50.homew50.model.Users;
 import homew50.homew50.repository.CommentRepository;
 import homew50.homew50.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;

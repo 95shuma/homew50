@@ -1,5 +1,6 @@
 package homew50.homew50.controller;
 
+import homew50.homew50.annotations.ApiPageable;
 import homew50.homew50.dto.PublicationDTO;
 import homew50.homew50.service.PublicationService;
 import org.springframework.data.domain.Pageable;
@@ -8,10 +9,16 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
+
+@ApiPageable
 @RestController
 @RequestMapping("/publication")
 public class PublicationController {
     PublicationService ps;
+
+    public PublicationController(PublicationService ps) {
+        this.ps = ps;
+    }
 
     @PostMapping()
     public PublicationDTO createPublication(@RequestBody PublicationDTO pubDTO) {

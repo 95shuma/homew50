@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     UserService us;
 
+    public UserController(UserService us) {
+        this.us = us;
+    }
+
     @PostMapping()
     public UserDTO createUser(@RequestBody UserDTO userDTO) {
         return us.createUser(userDTO);
