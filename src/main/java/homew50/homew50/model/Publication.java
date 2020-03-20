@@ -1,7 +1,7 @@
 package homew50.homew50.model;
 
-import lombok.Builder;
-import lombok.Data;
+import homew50.homew50.util.Generator;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -23,11 +23,15 @@ public class Publication {
     @DBRef
     private Users user;
     @DBRef
+    @Builder.Default
     private List<Comment> commentList = new ArrayList<>();
 
-    public Publication(String description, LocalDateTime date) {
-        this.description = description;
-        this.date = date;
+    public static Publication addPost(Users user) {
+        return builder()
+                .user(user)
+                .description(Generator.makeDescription())
+                .date(LocalDateTime.now())
+                .build();
     }
 
 }

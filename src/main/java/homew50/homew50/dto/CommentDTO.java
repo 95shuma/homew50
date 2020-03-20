@@ -21,7 +21,7 @@ public class CommentDTO {
                 .id(com.getId())
                 .text(com.getText())
                 .date(com.getDate())
-                .userId(com.getUserId())
+                .userId(com.getUser().getId())
                 .build();
     }
 }

@@ -1,5 +1,6 @@
 package homew50.homew50.model;
 
+import homew50.homew50.util.Generator;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -19,18 +20,23 @@ public class Users {
     private String mail;
     private String pass;
     @DBRef
+    @Builder.Default
     private List<Publication> publicationList = new ArrayList<>();
 
     @DBRef
-    private List<Users> subsciptions;
+    @Builder.Default
+    private List<Users> subsciptions= new ArrayList<>();
 
     @DBRef
-    private List<Users> subscibers;
+    @Builder.Default
+    private List<Users> subscibers= new ArrayList<>();
 
-    public Users(String name, String mail, String pass) {
-        this.name = name;
-        this.mail = mail;
-        this.pass = pass;
+    public static Users random() {
+        return builder()
+                .mail(Generator.makeEmail())
+                .name(Generator.makeName())
+                .pass(Generator.makePassword())
+                .build();
     }
 
 }
