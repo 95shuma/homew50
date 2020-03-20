@@ -23,4 +23,9 @@ public class CommentController {
     public void deleteComment(@PathVariable("id") String id){
         cr.deleteCommentById(id);
     }
+
+    @GetMapping("/all")
+    public Iterable<Comment> findAll(){
+        return cr.findAll();
+    }
 }

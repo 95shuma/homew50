@@ -6,6 +6,8 @@ import homew50.homew50.repository.PublicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/publication")
 public class PublicationController {
@@ -22,5 +24,10 @@ public class PublicationController {
     @DeleteMapping("/delete/{id}")
     public void deletePublication(@PathVariable("id") String id){
         pr.deletePublicationById(id);
+    }
+
+    @GetMapping("/all")
+    public Iterable<Publication> findAll(){
+        return pr.findAll();
     }
 }

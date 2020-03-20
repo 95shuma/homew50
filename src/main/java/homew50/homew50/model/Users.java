@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.ArrayList;
 import java.util.List;
 
-@Document
+@Document(collection = "userList")
 @Data
 public class Users {
     @Id
@@ -16,9 +16,6 @@ public class Users {
     private String name;
     private String mail;
     private String pass;
-    private int countPub;
-    private int countSubscriptions;
-    private int countSubscribers;
     @DBRef
     private List<Publication> publicationList = new ArrayList<>();
 

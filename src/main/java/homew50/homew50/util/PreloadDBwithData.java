@@ -63,8 +63,8 @@ public class PreloadDBwithData {
 
 
         ur.saveAll(createUsers());
-        pr.save(new Publication("some description 1","1.jpg",LocalDateTime.now()));
-        pr.save(new Publication("some description 2","2.jpg",LocalDateTime.now()));
+        pr.save(new Publication("some description 1",LocalDateTime.now()));
+        pr.save(new Publication("some description 2",LocalDateTime.now()));
 
         cr.save(new Comment("some text 1", LocalDateTime.now(),ur.findUsersByName("Arstan").getId()));
         cr.save(new Comment("some text 2", LocalDateTime.now(),ur.findUsersByName("Arstan").getId()));

@@ -15,14 +15,14 @@ public class Publication {
     @Id
     private String id;
     private String description;
-    private String image;
+    @DBRef
+    private PublicationImage image;
     private LocalDateTime date;
     @DBRef
     private List<Comment> commentList = new ArrayList<>();
 
-    public Publication(String description, String image, LocalDateTime date) {
+    public Publication(String description, LocalDateTime date) {
         this.description = description;
-        this.image = image;
         this.date = date;
     }
 
