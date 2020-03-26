@@ -24,7 +24,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/publication/*").fullyAuthenticated();
         http.authorizeRequests().antMatchers("/publication/delete/*").fullyAuthenticated();
         http.authorizeRequests().antMatchers("/comment/*").fullyAuthenticated();
-        http.authorizeRequests().antMatchers("/comment/all").fullyAuthenticated();
         http.authorizeRequests().antMatchers("/comment/delete/*").fullyAuthenticated();
         http.authorizeRequests().antMatchers("/images/*").fullyAuthenticated();
         //http.authorizeRequests().antMatchers("/user/*").fullyAuthenticated();
