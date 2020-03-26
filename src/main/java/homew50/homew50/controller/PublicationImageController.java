@@ -23,7 +23,7 @@ public class PublicationImageController {
         return pis.addImage(file);
     }
 
-    @GetMapping("/{imageId}")
+    @GetMapping("/id/{imageId}")
     public ResponseEntity<Resource> serveFile(@PathVariable String imageId) {
         Resource resource = pis.getById(imageId);
         return ResponseEntity.ok()

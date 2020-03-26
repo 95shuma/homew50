@@ -35,12 +35,12 @@ public class PublicationController {
         return ps.findAllPub(pageable);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public PublicationDTO findPubId(@PathVariable("id") String id){
         return ps.findPublicationById(id);
     }
 
-    @GetMapping("/{mail}")
+    @GetMapping("/mail/{mail}")
     public List<PublicationDTO> findPubByUsMail(@PathVariable("mail") String mail){
         return ps.findPubByUsMail(mail);
     }

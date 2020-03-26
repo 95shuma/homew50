@@ -1,11 +1,11 @@
 package homew50.homew50.service;
 
+import homew50.homew50.util.SecurityConfig;
 import homew50.homew50.dto.UserDTO;
 import homew50.homew50.model.Users;
 import homew50.homew50.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 public class UserService {
@@ -15,6 +15,10 @@ public class UserService {
 
     public UserDTO getUserByName(String name){
         return UserDTO.from(ur.findUsersByName(name));
+    }
+
+    public Users getUserByEmail(String mail){
+        return ur.findUsersByMail(mail);
     }
 
     public UserDTO getUserByMail(String mail){
@@ -30,7 +34,7 @@ public class UserService {
                 .id(userDTO.getId())
                 .name(userDTO.getName())
                 .mail(userDTO.getMail())
-                .pass(userDTO.getPass())
+                .pass(SecurityConfig.encoder().encode(userDTO.getPass()))
                 .publicationList(userDTO.getPublicationList())
                 .subscibers(userDTO.getSubscibers())
                 .subsciptions(userDTO.getSubsciptions())

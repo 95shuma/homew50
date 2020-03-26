@@ -27,7 +27,8 @@ public class PreloadDBwithData {
             cr.deleteAll();
 
             var user = Users.random();
-            user.setMail("123@gmail.com");
+            user.setMail("admin");
+            user.setPassword("admin");
             ur.save(user);
 
             List<Users> users = Stream.generate(Users::random)
