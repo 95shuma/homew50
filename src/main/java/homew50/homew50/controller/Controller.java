@@ -57,9 +57,9 @@ public class Controller {
         return res;
     }*/
 
-    @GetMapping("/2/5/{mail}")
+    @GetMapping("/like/{mail}")
     public boolean checkLikePub(@PathVariable("mail") String mail){
-        return lr.existsLikeByUserId(ur.findUsersByMail("mail").getId());
+        return lr.existsLikeByUserId(ur.findUsersByMail(mail).getId());
     }
 
 }
