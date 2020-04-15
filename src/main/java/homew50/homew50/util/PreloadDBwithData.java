@@ -37,7 +37,7 @@ public class PreloadDBwithData {
             ur.saveAll(users);
 
             List<Publication> posts = Stream.generate(() -> Publication.addPost(users.get(r.nextInt(users.size()))))
-                    .limit(10)
+                    .limit(2)
                     .collect(toList());
             pr.saveAll(posts);
 

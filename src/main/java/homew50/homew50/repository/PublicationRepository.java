@@ -4,6 +4,8 @@ import homew50.homew50.model.Publication;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import java.util.List;
+
 public interface PublicationRepository extends PagingAndSortingRepository<Publication, String> {
     Publication findPublicationByDescription(String des);
 
@@ -13,4 +15,6 @@ public interface PublicationRepository extends PagingAndSortingRepository<Public
     void deletePublicationById(String id);
 
     Publication findPublicationById(String id);
+
+    List<Publication> findAll();
 }

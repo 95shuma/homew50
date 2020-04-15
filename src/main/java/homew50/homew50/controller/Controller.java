@@ -4,12 +4,17 @@ import homew50.homew50.model.Publication;
 import homew50.homew50.model.Users;
 import homew50.homew50.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.time.LocalDateTime;
 
-@RestController
+@org.springframework.stereotype.Controller
 public class Controller {
     /*@Autowired
     CommentRepository cr;
@@ -20,8 +25,8 @@ public class Controller {
     @Autowired
     LikeRepository lr;
 
-    /*@Autowired
-    PublicationRepository pr;*/
+    @Autowired
+    PublicationRepository pr;
 
     @Autowired
     UsersRepository ur;
@@ -62,4 +67,63 @@ public class Controller {
         return lr.existsLikeByUserId(ur.findUsersByMail(mail).getId());
     }
 
+    @GetMapping("/")
+    public String demo1(Model model) {
+        return "index";
+    }
+
+    @GetMapping("/demo")
+    public String demo(Model model) {
+        return "demo";
+    }
+
+    @PostMapping("/demo/post")
+    public String postDemo(@RequestParam("login") String login,@RequestParam("password") String password) {
+        System.out.println(login);
+        System.out.println(password);
+        return "redirect:/demo";
+    }
+
+    @PostMapping("/post")
+    public String rootSave(@RequestParam("des") String des,
+                           @RequestParam("id") String id,
+                           @RequestParam("photo") MultipartFile photo) throws IOException {
+        File photoFile = new File("../img/"+photo.getOriginalFilename());
+        //photoFile.createNewFile();
+        FileOutputStream os = new FileOutputStream(photoFile);
+        os.write(photo.getBytes());
+        os.close();
+
+        Publication publication = new Publication(id,des,"../img/"+photo.getOriginalFilename(),
+                LocalDateTime.now(), null);
+        pr.save(publication);
+
+        return "success";
+    }
+
+    @GetMapping("/img/{name}")
+    @ResponseBody
+    public ResponseEntity<byte[]> getImage(@PathVariable("name") String name) {
+        String path = "../img";
+        try {
+            InputStream is = new FileInputStream(new File(path) + "/" + name);
+            return ResponseEntity
+                    .ok()
+                    .contentType(name.toLowerCase().contains(".png")? MediaType.IMAGE_PNG:MediaType.IMAGE_JPEG)
+                    .body(StreamUtils.copyToByteArray(is));
+        } catch (Exception e) {
+            InputStream is = null;
+            try {
+                is = new FileInputStream(new File(path) + "/" + name);
+                return ResponseEntity
+                        .ok()
+                        .contentType(name.toLowerCase().contains(".png")?MediaType.IMAGE_PNG:MediaType.IMAGE_JPEG)
+                        .body(StreamUtils.copyToByteArray(is));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

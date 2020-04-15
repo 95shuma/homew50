@@ -17,23 +17,21 @@ import java.util.List;
 public class PublicationDTO {
     private String id;
     private String description;
-    private String imageId;
+    private String image;
     private String userId;
     private LocalDateTime date;
-    private List<Comment> commentList = new ArrayList<>();
 
     public static PublicationDTO from(Publication pub) {
-        var pubImageId = pub.getImage() == null
+        /*var pubImageId = pub.getImage() == null
                 ? "-no-image-id"
-                : pub.getImage().getId();
+                : pub.getImage().getId();*/
 
         return builder()
                 .id(pub.getId())
                 .description(pub.getDescription())
-                .imageId(pubImageId)
+                .image(pub.getImagePath())
                 .userId(pub.getUser().getId())
                 .date(pub.getDate())
-                .commentList(pub.getCommentList())
                 .build();
     }
 }

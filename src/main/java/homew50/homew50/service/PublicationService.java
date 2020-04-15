@@ -30,14 +30,12 @@ public class PublicationService {
     UsersRepository ur;
 
     public PublicationDTO createPublication(PublicationDTO publicationDTO){
-        PublicationImage img = pir.findPublicationImageById(publicationDTO.getImageId());
+        //PublicationImage img = pir.findPublicationImageById(publicationDTO.getImageId());
         Publication pub = Publication.builder()
                 .id(publicationDTO.getId())
                 .description(publicationDTO.getDescription())
-                .image(img)
                 .user(ur.findUsersById(publicationDTO.getUserId()))
                 .date(publicationDTO.getDate())
-                .commentList(publicationDTO.getCommentList())
                 .build();
         pr.save(pub);
         return PublicationDTO.from(pub);
