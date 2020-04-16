@@ -30,7 +30,6 @@ public class PublicationDTO {
                 .id(pub.getId())
                 .description(pub.getDescription())
                 .image(pub.getImagePath())
-                .userId(pub.getUser().getId())
                 .date(pub.getDate())
                 .build();
     }

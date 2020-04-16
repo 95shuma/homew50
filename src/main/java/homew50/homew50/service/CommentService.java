@@ -23,7 +23,6 @@ public class CommentService {
                 .id(commentDTO.getId())
                 .text(commentDTO.getText())
                 .date(commentDTO.getDate())
-                .user(ur.findUsersById(commentDTO.getUserId()))
                 .build();
         cr.save(com);
         return CommentDTO.from(com);

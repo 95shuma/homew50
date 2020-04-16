@@ -22,8 +22,7 @@ public class Publication {
     private String description;
     private String imagePath;
     private LocalDateTime date;
-    @DBRef
-    private Users user;
+    private String userId;
 
     /*public Publication(String id, String description, String imagePath){
         Objects.requireNonNull(description);
@@ -51,7 +50,6 @@ public class Publication {
     public static Publication addPost(Users user) {
         Random r = new Random();
         return builder()
-                .user(user)
                 .description(Generator.makeDescription())
                 .date(LocalDateTime.now())
                 .imagePath("../img/"+(1+r.nextInt(5))+".jpg")

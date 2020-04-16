@@ -1,5 +1,6 @@
 package homew50.homew50.controller;
 
+import homew50.homew50.model.Comment;
 import homew50.homew50.model.Publication;
 import homew50.homew50.model.Users;
 import homew50.homew50.repository.*;
@@ -16,10 +17,10 @@ import java.time.LocalDateTime;
 
 @org.springframework.stereotype.Controller
 public class Controller {
-    /*@Autowired
+    @Autowired
     CommentRepository cr;
 
-    @Autowired
+    /*@Autowired
     EventRepository er;*/
 
     @Autowired
@@ -87,6 +88,7 @@ public class Controller {
     @PostMapping("/post")
     public String rootSave(@RequestParam("des") String des,
                            @RequestParam("id") String id,
+                           @RequestParam("userId") String userId,
                            @RequestParam("photo") MultipartFile photo) throws IOException {
         File photoFile = new File("../img/"+photo.getOriginalFilename());
         //photoFile.createNewFile();
@@ -95,10 +97,24 @@ public class Controller {
         os.close();
 
         Publication publication = new Publication(id,des,"../img/"+photo.getOriginalFilename(),
-                LocalDateTime.now(), null);
+                LocalDateTime.now(), userId);
         pr.save(publication);
 
         return "success";
+
+    }
+
+    @PostMapping("/comm")
+    public String commSave(@RequestParam("userId") String userId,
+                           @RequestParam("postId") String postId,
+                           @RequestParam("comment") String comment,
+                           @RequestParam("commId") String commId) {
+
+        Comment comment1 = new Comment(commId,comment,LocalDateTime.now(),userId,postId);
+        cr.save(comment1);
+
+        return "success";
+
     }
 
     @GetMapping("/img/{name}")

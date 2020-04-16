@@ -18,6 +18,7 @@
 
         </div>
         <form id="form" name="form" enctype="multipart/form-data" action="/post" method="post">
+            <input type="hidden" name="userId" value="123">
             <input type="hidden" name="id" value="123">
             <input type="text" placeholder="Описание" name="des">
             <input type="file" name="photo" id="photo">

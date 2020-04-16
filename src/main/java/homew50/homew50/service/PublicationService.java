@@ -34,7 +34,6 @@ public class PublicationService {
         Publication pub = Publication.builder()
                 .id(publicationDTO.getId())
                 .description(publicationDTO.getDescription())
-                .user(ur.findUsersById(publicationDTO.getUserId()))
                 .date(publicationDTO.getDate())
                 .build();
         pr.save(pub);
