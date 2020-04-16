@@ -42,7 +42,7 @@ public class PreloadDBwithData {
             pr.saveAll(posts);
 
             List<Comment> comments = Stream.generate(() -> Comment.addComment(users.get(r.nextInt(users.size())), posts.get(r.nextInt(posts.size()))))
-                    .limit(10)
+                    .limit(1)
                     .collect(toList());
             cr.saveAll(comments);
             System.out.println("done");

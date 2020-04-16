@@ -107,14 +107,13 @@ public class Controller {
     @PostMapping("/comm")
     public String commSave(@RequestParam("userId") String userId,
                            @RequestParam("postId") String postId,
-                           @RequestParam("comment") String comment,
-                           @RequestParam("commId") String commId) {
+                           @RequestParam("commId") String commId,
+                           @RequestParam("comment") String comment) {
 
         Comment comment1 = new Comment(commId,comment,LocalDateTime.now(),userId,postId);
         cr.save(comment1);
 
         return "success";
-
     }
 
     @GetMapping("/img/{name}")

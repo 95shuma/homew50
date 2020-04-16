@@ -114,11 +114,12 @@ function createPostElement(post) {
                 <a href="#" class="muted">someusername</a>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum ad est cumque nulla voluptatem enim voluptas minima illum quis! Voluptatibus dolorem minus tempore aliquid corrupti nesciunt, obcaecati fuga natus officiis.</p>
               </div>
+              <button onclick="g()">Add Comm</button>
             </div>
             <button class="show-form" id="m.${post.id}" onclick="showForm(this.id)">Show form</button>
             <br>
             <div class="add-comment-form" id="comm.${post.id}">
-                <form name="form" action="/comm" method="post" id="form.${post.id}">
+                <form id="form.${post.id}" class="form" name="form" action="/comm" method="post" >
                     <input type="hidden" name="userId" value="${post.userId}">
                     <input type="hidden" name="postId" value="${post.id}">
                     <input type="hidden" name="commId" value="12345">
@@ -219,6 +220,31 @@ class Post{
     }
 }
 
+class Comment {
+    constructor(userId,postId,commId,comm) {
+        this.userId = userId;
+        this.postId = postId;
+        this.commId = commId;
+        this.comm = comm;
+    }
+}
+
+async function getComments() {
+    const response = await fetch('http://localhost:8000/comment/all',{
+        headers : {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+
+    });
+    if (response.ok) { // если HTTP-статус в диапазоне 200-299
+        // получаем тело ответа (см. про этот метод ниже)
+        return await response.json();
+    } else {
+        alert("Ошибка HTTP: " + response.status);
+    }
+}
+
 async function f(){
     let posts = await getPosts();
 
@@ -227,6 +253,19 @@ async function f(){
         let elem = createPostElement(post)
         console.log(post);
         document.getElementById("posts").appendChild(elem);
+    }
+};
+
+async function g(){
+    let comments = await getComments();
+
+    for(let i=0; i<comments.length;i++){
+        let comm = new Comment(comments[i].userId,
+            comments[i].postId,comments[i].id,
+            comments[i].text);
+        let elem = createCommentElement(comm)
+        console.log(comm);
+        addCommentElement(elem)
     }
 };
 
@@ -243,9 +282,12 @@ function a_fun(){
 
 function b_fun(id) {
     const comForm = document.getElementById("fo" + id);
+    if(comForm.classList.contains("form")){
+        console.log("hi");
+    }
     let data = new FormData(comForm);
 
-    fetch("http://localhost:8000/post", {
+    fetch("http://localhost:8000/comm", {
         method: 'POST',
         body: data
     }).then(r => r.json()).then(data => {
