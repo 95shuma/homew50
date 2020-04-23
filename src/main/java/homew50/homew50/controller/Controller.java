@@ -4,9 +4,12 @@ import homew50.homew50.model.Comment;
 import homew50.homew50.model.Publication;
 import homew50.homew50.model.Users;
 import homew50.homew50.repository.*;
+import homew50.homew50.service.UserAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +34,9 @@ public class Controller {
 
     @Autowired
     UsersRepository ur;
+
+    @Autowired
+    UserAuthService uas;
 
     /*@GetMapping("/2/1/1/{name}")
     public Users getUserByName(@PathVariable("name") String name){
@@ -114,6 +120,19 @@ public class Controller {
         cr.save(comment1);
 
         return "success";
+    }
+
+    @RequestMapping("/user/login")
+    public Users logUser(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        var a =  ur.findUsersByMail(auth.getName());
+        System.out.println("getUser method: " + a.getMail());
+        return a;
+    }
+
+    @PostMapping("/user/login")
+    public Users checkLogin(@RequestParam("mail") String login, @RequestParam("password") String password) {
+        return uas.loadUserByUsername(login);
     }
 
     @GetMapping("/img/{name}")

@@ -3,8 +3,13 @@ package homew50.homew50.controller;
 import homew50.homew50.dto.UserDTO;
 import homew50.homew50.model.Users;
 import homew50.homew50.repository.UsersRepository;
+import homew50.homew50.service.UserAuthService;
 import homew50.homew50.service.UserService;
+import homew50.homew50.util.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -30,6 +35,8 @@ public class UserController {
         ur.save(user);
         return user;
     }
+
+
 
     @PostMapping()
     public UserDTO createUser(@RequestBody UserDTO userDTO) {

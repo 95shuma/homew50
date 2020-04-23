@@ -13,6 +13,7 @@
     <div class="row justify-content-center">
 
         <div class="col col-lg-7 posts-container" id="posts">
+            <button onclick="clearLocalS()" style="font-size: 26px">Log out</button>
             <!--<button class="btn" onclick="showSplashScreen()">Show Splash Screen</button>-->
 
 
@@ -34,7 +35,7 @@
             <button class="btn" onclick="showLogForm()" style="font-size: 26px">Форма для входа</button>
             <form id="login-form">
                 <h3>Вход</h3>
-                <input type="text" name="username" class="form-control mb-1" placeholder="Логин">
+                <input type="text" name="mail" class="form-control mb-1" placeholder="Логин">
                 <input type="password" name="password" class="form-control mb-1" placeholder="Пароль">
                 <button class="btn btn-outline-primary btn-block">Войти</button>
             </form>
