@@ -55,10 +55,6 @@ public class PublicationService {
     public List<PublicationDTO> findPubByUsMail(String mail){
         List<Publication> res = new ArrayList<>();
         Users user = ur.findUsersByMail(mail);
-        List<Users> subs = user.getSubsciptions();
-        for (Users s: subs) {
-            res.addAll(s.getPublicationList());
-        }
 
         List<PublicationDTO> publicationDTOs=new ArrayList<>();
         for(Publication p : res){

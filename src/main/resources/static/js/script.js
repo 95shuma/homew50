@@ -42,6 +42,22 @@ function showForm(id) {
     }
 }
 
+function showRegForm() {
+    let form = document.getElementById("registration-form");
+    if (form.classList.contains("registration-form")){
+        form.classList.remove("registration-form");
+        document.getElementById("login-form").classList.add("login-form");
+    }
+}
+
+function showLogForm() {
+    let form = document.getElementById("login-form");
+    if (form.classList.contains("login-form")){
+        form.classList.remove("login-form");
+        document.getElementById("registration-form").classList.add("registration-form");
+    }
+}
+
 // function hideForm() {
 //     const form = document.getElementsByClassName("add-comment-form");
 //     for (let i=0; i<form.length; i++){
@@ -113,9 +129,9 @@ function createPostElement(post) {
               <div class="py-2 pl-3">
                 <a href="#" class="muted">someusername</a>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum ad est cumque nulla voluptatem enim voluptas minima illum quis! Voluptatibus dolorem minus tempore aliquid corrupti nesciunt, obcaecati fuga natus officiis.</p>
-              </div>
+              <!-- </div>
               <button onclick="g()">Add Comm</button>
-            </div>
+            </div> -->
             <button class="show-form" id="m.${post.id}" onclick="showForm(this.id)">Show form</button>
             <br>
             <div class="add-comment-form" id="comm.${post.id}">
@@ -253,6 +269,7 @@ async function f(){
         let elem = createPostElement(post)
         console.log(post);
         document.getElementById("posts").appendChild(elem);
+        g();
     }
 };
 
@@ -294,3 +311,34 @@ function b_fun(id) {
         window.location.href = "http://localhost:8000/"
     });
 }
+
+window.addEventListener('load', function () {
+
+    const registrationForm = document.getElementById('registration-form');
+    registrationForm.addEventListener('submit', onRegisterHandler);
+
+    function onRegisterHandler(e) {
+        e.preventDefault();
+        const form = e.target;
+        const data = new FormData(form);
+        const userJSON = JSON.stringify(Object.fromEntries(data));
+        createUser(data);
+    }
+
+    const baseUrl = 'http://localhost:8000';
+
+    async function createUser(userJSON) {
+        const settings = {
+            method: 'POST',
+            body: userJSON
+        };
+
+        const response = await fetch(baseUrl + '/user/registration', settings);
+        const responseData = await response.json();
+
+        console.log(responseData);
+
+        window.location.href = baseUrl;
+    }
+
+});

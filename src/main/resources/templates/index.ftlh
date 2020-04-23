@@ -29,12 +29,28 @@
 </div>
 <!-- Splash screen -->
 <section id="page-splash" class="page-splash">
-    <div class="card" id="registration-form">
+    <div class="card" id="registration-form1">
         <div class="card-body">
-            <h3 class="h3">Зарегистрируйтесь</h3>
+            <button class="btn" onclick="showLogForm()" style="font-size: 26px">Форма для входа</button>
+            <form id="login-form">
+                <h3>Вход</h3>
+                <input type="text" name="username" class="form-control mb-1" placeholder="Логин">
+                <input type="password" name="password" class="form-control mb-1" placeholder="Пароль">
+                <button class="btn btn-outline-primary btn-block">Войти</button>
+            </form>
+        </div>
+        <div class="card-body">
+            <button class="btn" onclick="showRegForm()" style="font-size: 26px">Форма для регистрации</button>
+            <form id="registration-form" class="registration-form">
+                <h3>Регистрация</h3>
+                <input type="email" name="email" class="form-control mb-1" placeholder="Email">
+                <input type="text" name="name" class="form-control mb-1" placeholder="Полное имя">
+                <input type="text" name="login" class="form-control mb-1" placeholder="Логин">
+                <input type="password" name="password" class="form-control mb-1" placeholder="Пароль">
+                <button class="btn btn-outline-primary btn-block">Зарегистрироваться</button>
+            </form>
         </div>
     </div>
-    <button class="btn" onclick="hideSplashScreen()" style="font-size: 26px">Login</button>
 </section>
 </body>
 </html>

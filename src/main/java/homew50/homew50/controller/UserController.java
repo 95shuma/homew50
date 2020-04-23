@@ -1,16 +1,34 @@
 package homew50.homew50.controller;
 
 import homew50.homew50.dto.UserDTO;
+import homew50.homew50.model.Users;
+import homew50.homew50.repository.UsersRepository;
 import homew50.homew50.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    @Autowired
+    UsersRepository ur;
+
     UserService us;
 
     public UserController(UserService us) {
         this.us = us;
+    }
+
+    @PostMapping("/registration")
+    public Users createUser(@RequestParam("email")String email, @RequestParam("name")String name,
+                            @RequestParam("login")String login, @RequestParam("password")String password){
+        var user = new Users(UUID.randomUUID().toString(), name, login, email, password);
+        user.setPassword(user.getPassword());
+        ur.save(user);
+        return user;
     }
 
     @PostMapping()

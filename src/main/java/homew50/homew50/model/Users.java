@@ -2,6 +2,8 @@ package homew50.homew50.model;
 
 import homew50.homew50.util.SecurityConfig;
 import homew50.homew50.util.Generator;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -16,15 +18,17 @@ import java.util.Collection;
 import java.util.List;
 
 @Document(collection = "userList")
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 @Data
 @Builder
 public class Users implements UserDetails {
     @Id
     private String id;
     private String name;
+    private String login;
     private String mail;
     private String pass;
-    @DBRef
+    /*@DBRef
     @Builder.Default
     private List<Publication> publicationList = new ArrayList<>();
 
@@ -34,7 +38,7 @@ public class Users implements UserDetails {
 
     @DBRef
     @Builder.Default
-    private List<Users> subscibers= new ArrayList<>();
+    private List<Users> subscibers= new ArrayList<>();*/
 
     public static Users random() {
         return builder()
